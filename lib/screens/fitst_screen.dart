@@ -1,3 +1,5 @@
+import 'package:abans_city_clean_supervisor/screens/login/login_screen.dart';
+import 'package:abans_city_clean_supervisor/screens/login/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -124,7 +126,11 @@ class MainScreen extends StatelessWidget {
                       height: 56,
                       child: ElevatedButton.icon(
                         onPressed: () {
-                        
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
                         },
                         icon: Icon(
                           Icons.login,
@@ -151,7 +157,11 @@ class MainScreen extends StatelessWidget {
                       height: 56,
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()),
+                          );
                         },
                         icon: Icon(Icons.person_add,
                             size: 24, color: Colors.white),
