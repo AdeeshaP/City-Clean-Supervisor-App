@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="abans_city_clean_supervisor"
+        android:label="Abans CCS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
