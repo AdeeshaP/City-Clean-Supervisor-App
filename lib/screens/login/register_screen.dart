@@ -1,4 +1,3 @@
-
 import 'package:abans_city_clean_supervisor/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -74,6 +73,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: _nameController,
                     decoration: InputDecoration(
                       labelText: 'Full Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       prefixIcon: Icon(Icons.person),
                     ),
                     validator: (value) {
@@ -88,6 +101,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       prefixIcon: Icon(Icons.email),
                     ),
                     validator: (value) {
@@ -105,6 +132,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: _areaController,
                     decoration: InputDecoration(
                       labelText: 'Assigned Area',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       prefixIcon: Icon(Icons.location_on),
                     ),
                     validator: (value) {
@@ -121,9 +162,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       labelText: 'Password',
                       prefixIcon: Icon(Icons.lock),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -148,14 +205,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     obscureText: !_isConfirmPasswordVisible,
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       prefixIcon: Icon(Icons.lock_outline),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isConfirmPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
-                            _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                            _isConfirmPasswordVisible =
+                                !_isConfirmPasswordVisible;
                           });
                         },
                       ),
@@ -179,7 +253,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? CircularProgressIndicator(color: Colors.white)
                           : Text(
                               'Register',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                     ),
                   ),
@@ -192,7 +267,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
                           );
                         },
                         child: Text('Login'),

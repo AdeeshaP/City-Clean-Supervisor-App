@@ -1,3 +1,4 @@
+import 'package:abans_city_clean_supervisor/screens/dashboard/dashboard_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/login/login_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/login/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,8 @@ class MainScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
+                                // builder: (context) => LoginScreen
+                                builder: (context) => DashboardScreen()),
                           );
                         },
                         icon: Icon(

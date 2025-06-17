@@ -1,0 +1,70 @@
+{
+  "pending_issues": [
+    {
+      "id": "001",
+      "title": "Overflowing Garbage Bin",
+      "description": "Garbage bin is overflowing and needs immediate attention. Waste is scattered around the area.",
+      "location": "Colombo",
+      "reported_date": "2024-03-12T11:24:00Z",
+      "status": "Open",
+      "image_url": "https://i.pinimg.com/736x/5d/f6/f3/5df6f36a6bb928836ec50358bc193025.jpg",
+      "reported_by": "Citizen Reporter",
+      "priority": "High"
+    },
+    {
+      "id": "002",
+      "title": "Missed Collection",
+      "description": "Garbage collection was missed in this area yesterday. Multiple bins are full.",
+      "location": "Dehiwala",
+      "reported_date": "2024-03-11T09:15:00Z",
+      "status": "Open",
+      "image_url": "https://recycling1011.wordpress.com/wp-content/uploads/2021/03/waste_seperation_at_home_111_20.jpg",
+      "reported_by": "John Silva",
+      "priority": "Medium"
+    },
+    {
+      "id": "003",
+      "title": "Broken Waste Container",
+      "description": "The waste container is damaged and cannot hold garbage properly. Needs replacement.",
+      "location": "Mount Lavinia",
+      "reported_date": "2024-03-10T14:30:00Z",
+      "status": "Open",
+      "image_url": "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=400&h=300&fit=crop",
+      "reported_by": "Maria Fernando",
+      "priority": "Medium"
+    },
+    {
+      "id": "004",
+      "title": "Illegal Dumping",
+      "description": "Large amount of construction waste dumped illegally on the roadside.",
+      "location": "Nugegoda",
+      "reported_date": "2024-03-09T16:45:00Z",
+      "status": "Open",
+      "image_url": "https://www.joshgellers.com/uploads/1/3/4/3/13431882/trash1_orig.jpg",
+      "reported_by": "Kamal Perera",
+      "priority": "High"
+    },
+    {
+      "id": "005",
+      "title": "Blocked Drainage",
+      "description": "Drainage is blocked due to accumulated garbage. Water is stagnating.",
+      "location": "Moratuwa",
+      "reported_date": "2024-03-08T08:20:00Z",
+      "status": "Open",
+      "image_url": "https://consumer.org.my/wp-content/uploads/2024/04/20-April-2024-Clogged-drain-pix-1.jpg",
+      "reported_by": "Anjali Rodrigo",
+      "priority": "High"
+    },
+    {
+      "id": "006",
+      "title": "Overflowing Dumpster",
+      "description": "Community dumpster is overflowing. Attracting stray animals and creating bad odor.",
+      "location": "Kelaniya",
+      "reported_date": "2024-03-07T13:10:00Z",
+      "status": "Open",
+      "image_url": "https://thumbs.dreamstime.com/b/huge-garbage-piles-next-to-dumpster-overflow-kota-kinabalu-sabah-malaysia-march-214405661.jpg",
+      "reported_by": "Priya Mendis",
+      "priority": "Medium"
+    }
+  ]
+}

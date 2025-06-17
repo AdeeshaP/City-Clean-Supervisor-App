@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Login'),
         centerTitle: true,
@@ -69,6 +70,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       labelText: 'Email',
                       prefixIcon: Icon(Icons.email),
                     ),
@@ -87,11 +102,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: !_isPasswordVisible,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 216, 16, 2)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: const Color.fromARGB(255, 0, 1, 10)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       labelText: 'Password',
                       prefixIcon: Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -117,7 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         // Handle forgot password
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Forgot password feature coming soon!')),
+                          SnackBar(
+                              content:
+                                  Text('Forgot password feature coming soon!')),
                         );
                       },
                       child: Text('Forgot Password?'),
@@ -132,7 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? CircularProgressIndicator(color: Colors.white)
                           : Text(
                               'Login',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                     ),
                   ),
@@ -145,7 +179,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => RegisterScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()),
                           );
                         },
                         child: Text('Register'),

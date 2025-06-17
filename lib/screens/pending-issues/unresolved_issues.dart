@@ -1,0 +1,310 @@
+import 'package:abans_city_clean_supervisor/models/issue.dart';
+import 'package:abans_city_clean_supervisor/screens/pending-issues/view_issue.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
+class PendingIssuesScreen extends StatefulWidget {
+  @override
+  _PendingIssuesScreenState createState() => _PendingIssuesScreenState();
+}
+
+class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
+  List<Issue> pendingIssues = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadIssues();
+  }
+
+  void loadIssues() async {
+    try {
+      // Load the JSON file from assets
+      final String jsonString =
+          await rootBundle.loadString('assets/json/issues.json');
+
+      // Parse the JSON
+      final Map<String, dynamic> jsonData = json.decode(jsonString);
+      final List<dynamic> issuesJson = jsonData['pending_issues'];
+
+      setState(() {
+        pendingIssues = issuesJson.map((json) => Issue.fromJson(json)).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pending Issues'),
+        centerTitle: true,
+        backgroundColor: Color(0xFF6A1B9A),
+        foregroundColor: Colors.white,
+      ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              // color: Color(0xFFF5F5F5),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFFFFC107).withOpacity(0.3),
+                    Color(0xFFFFF8E1),
+                    Color(0xFFFFFBE6),
+                  ],
+                ),
+              ),
+              child: pendingIssues.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            size: 64,
+                            color: Colors.grey[400],
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'No Pending Issues',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: EdgeInsets.all(16),
+                      itemCount: pendingIssues.length,
+                      itemBuilder: (context, index) {
+                        final issue = pendingIssues[index];
+                        return _buildIssueCard(issue);
+                      },
+                    ),
+            ),
+    );
+  }
+
+  Widget _buildIssueCard(Issue issue) {
+    Color priorityColor = _getPriorityColor(issue.priority);
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IssueDetailsScreen(issue: issue),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header with priority and date
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: priorityColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      issue.priority,
+                      style: TextStyle(
+                        color: priorityColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    _formatDate(issue.reportedDate),
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+
+              // Issue image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  height: 120,
+                  width: double.infinity,
+                  child: Image.network(
+                    issue.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[200],
+                        child: Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey[400],
+                          size: 40,
+                        ),
+                      );
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Container(
+                        color: Colors.grey[200],
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
+
+              // Location
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    color: Color(0xFF6A1B9A),
+                    size: 16,
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    issue.location,
+                    style: TextStyle(
+                      color: Color(0xFF6A1B9A),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+
+              // Title
+              Text(
+                issue.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+              ),
+              SizedBox(height: 4),
+
+              // Description (truncated)
+              Text(
+                issue.description,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 12),
+
+              // Status and Reporter
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      issue.status,
+                      style: TextStyle(
+                        color: Colors.orange[700],
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'By: ${issue.reportedBy}',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Color _getPriorityColor(String priority) {
+    switch (priority.toLowerCase()) {
+      case 'high':
+        return Colors.red;
+      case 'medium':
+        return Colors.orange;
+      case 'low':
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+
+    return '${months[date.month - 1]} ${date.day}, ${date.year}';
+  }
+}
