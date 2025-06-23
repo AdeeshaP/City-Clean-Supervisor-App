@@ -1,6 +1,9 @@
+import 'package:abans_city_clean_supervisor/screens/completed-issues/resolved_issues.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/pending-issues/unresolved_issues.dart';
 import 'package:flutter/material.dart';
+
+import '../../constants/color_pallettee.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -204,7 +207,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                         ),
                         Text(
-                          'Area: Colombo  07',
+                          'Area: Colombo MC Area',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
@@ -225,7 +228,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '15',
                     'Collection Routes',
                     Icons.local_shipping,
-                    Color(0xFF4CAF50),
+                    iconColorDahsbaord,
                     () {},
                   ),
                 ),
@@ -235,7 +238,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '28',
                     'Active Trucks',
                     Icons.fire_truck,
-                    Color(0xFF4CAF50),
+                    iconColorDahsbaord,
                     () {},
                   ),
                 ),
@@ -249,7 +252,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '6',
                     'Pending Issues',
                     Icons.warning,
-                    Color(0xFF4CAF50),
+                    iconColorDahsbaord,
                     () {
                       Navigator.push(
                         context,
@@ -265,14 +268,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '42',
                     'Completed Today',
                     Icons.check_circle,
-                    Color(0xFF4CAF50),
-                    () {},
+                    iconColorDahsbaord,
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResolvedIssuesScreen()),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
 
-            SizedBox(height: 32),
+            SizedBox(height: 28),
 
             // Section Title
             Text(
@@ -292,8 +301,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   icon: Icons.route,
                   title: 'Route Management',
                   subtitle: 'Plan and monitor collection routes',
-                  // color: Color(0xFF4CAF50),
-                  color: Color(0xFF4CAF50),
+                  // color: iconColorDahsbaord,
+                  color: iconColorDahsbaord,
                   onTap: () => _showComingSoon(context),
                 ),
                 SizedBox(height: 12),
@@ -302,7 +311,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   title: 'Issue Tracking',
                   subtitle: 'Monitor and resolve collection issues',
                   // color: Color(0xFFFF9800),
-                  color: Color(0xFF4CAF50),
+                  color: iconColorDahsbaord,
 
                   onTap: () => _showComingSoon(context),
                 ),
@@ -312,7 +321,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   title: 'Performance Reports',
                   subtitle: 'View collection statistics and trends',
                   // color: Color(0xFF2196F3),
-                  color: Color(0xFF4CAF50),
+                  color: iconColorDahsbaord,
 
                   onTap: () => _showComingSoon(context),
                 ),
@@ -322,7 +331,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   title: 'Schedule Management',
                   subtitle: 'Manage collection schedules and shifts',
                   // color: Color(0xFF9C27B0),
-                  color: Color(0xFF4CAF50),
+                  color: iconColorDahsbaord,
 
                   onTap: () => _showComingSoon(context),
                 ),

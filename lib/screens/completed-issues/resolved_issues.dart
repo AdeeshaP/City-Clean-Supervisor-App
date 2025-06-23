@@ -1,17 +1,17 @@
-import 'package:abans_city_clean_supervisor/models/issue.dart';
-import 'package:abans_city_clean_supervisor/screens/pending-issues/view_issue.dart';
+import 'package:abans_city_clean_supervisor/models/complete_issue.dart';
+import 'package:abans_city_clean_supervisor/screens/completed-issues/view_sorted_issues.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-class PendingIssuesScreen extends StatefulWidget {
+class ResolvedIssuesScreen extends StatefulWidget {
   @override
-  _PendingIssuesScreenState createState() => _PendingIssuesScreenState();
+  _ResolvedIssuesScreenState createState() => _ResolvedIssuesScreenState();
 }
 
-class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
-  List<Issue> pendingIssues = [];
+class _ResolvedIssuesScreenState extends State<ResolvedIssuesScreen> {
+  List<IssueComplete> sortedOutIssues = [];
   bool isLoading = true;
 
   @override
@@ -24,14 +24,15 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
     try {
       // Load the JSON file from assets
       final String jsonString =
-          await rootBundle.loadString('assets/json/issues.json');
+          await rootBundle.loadString('assets/json/complete_issues.json');
 
       // Parse the JSON
       final Map<String, dynamic> jsonData = json.decode(jsonString);
-      final List<dynamic> issuesJson = jsonData['pending_issues'];
+      final List<dynamic> issuesJson = jsonData['resolved_issues'];
 
       setState(() {
-        pendingIssues = issuesJson.map((json) => Issue.fromJson(json)).toList();
+        sortedOutIssues =
+            issuesJson.map((json) => IssueComplete.fromJson(json)).toList();
         isLoading = false;
       });
     } catch (e) {
@@ -45,7 +46,7 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pending Issues'),
+        title: Text('Completed Issues'),
         centerTitle: true,
         backgroundColor: Color(0xFF6A1B9A),
         foregroundColor: Colors.white,
@@ -65,7 +66,7 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
                   ],
                 ),
               ),
-              child: pendingIssues.isEmpty
+              child: sortedOutIssues.isEmpty
                   ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +78,7 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
                           ),
                           SizedBox(height: 16),
                           Text(
-                            'No Pending Issues',
+                            'No Completed Issues',
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey[600],
@@ -88,9 +89,9 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
                     )
                   : ListView.builder(
                       padding: EdgeInsets.all(16),
-                      itemCount: pendingIssues.length,
+                      itemCount: sortedOutIssues.length,
                       itemBuilder: (context, index) {
-                        final issue = pendingIssues[index];
+                        final issue = sortedOutIssues[index];
                         return _buildIssueCard(issue);
                       },
                     ),
@@ -98,8 +99,8 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
     );
   }
 
-  Widget _buildIssueCard(Issue issue) {
-    Color priorityColor = _getPriorityColor(issue.priority);
+  Widget _buildIssueCard(IssueComplete issue) {
+    // Color priorityColor = _getPriorityColor(issue.priority);
 
     return Container(
       margin: EdgeInsets.only(bottom: 16),
@@ -116,10 +117,10 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.push(
+            Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => IssueDetailsScreen(issue: issue),
+              builder: (context) => SortedIssueDetails(issue: issue),
             ),
           );
         },
@@ -135,14 +136,10 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    // decoration: BoxDecoration(
-                    //   color: priorityColor.withOpacity(0.1),
-                    //   borderRadius: BorderRadius.circular(12),
-                    // ),
                     child: Text(
-                      issue.priority,
+                      "",
                       style: TextStyle(
-                        color: priorityColor,
+                        color: Colors.transparent,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
@@ -274,19 +271,6 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
         ),
       ),
     );
-  }
-
-  Color _getPriorityColor(String priority) {
-    switch (priority.toLowerCase()) {
-      case 'high':
-        return Colors.red;
-      case 'medium':
-        return Colors.orange;
-      case 'low':
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
   }
 
   String _formatDate(DateTime date) {

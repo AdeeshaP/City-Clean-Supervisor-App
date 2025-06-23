@@ -1,0 +1,69 @@
+{
+    "resolved_issues": [
+        {
+            "id": "001",
+            "title": "Overflowing Garbage Bin",
+            "description": "Garbage bin is overflowing and needs immediate attention. Waste is scattered around the area.",
+            "location": "Near Viharamahadevi Park",
+            "latitude": "6.898802",
+            "longitude": "79.856213",
+            "reported_date": "2025-06-12T11:24:00Z",
+            "solved_date": "2025-06-12T15:20:00Z",
+            "status": "Closed",
+            "image_url": "https://thumbs.dreamstime.com/b/garbage-bins-overflowing-cause-pollution-51575293.jpg",
+            "reported_by": "Citizen Reporter"
+        },
+        {
+            "id": "002",
+            "title": "Missed Collection",
+            "description": "Garbage collection was missed in this area yesterday. Multiple bins are full.",
+            "location": "Jawaththa Road",
+            "latitude": "6.906124",
+            "longitude": "79.873299",
+            "reported_date": "2025-06-16T09:15:00Z",
+            "solved_date": "2025-06-16T09:55:00Z",
+            "status": "Open",
+            "image_url": "https://recycling1011.wordpress.com/wp-content/uploads/2021/03/waste_seperation_at_home_111_20.jpg",
+            "reported_by": "Mahinda Padmakumara"
+        },
+        {
+            "id": "003",
+            "title": "Missed Collection",
+            "description": "Garbage collection was missed in this area yesterday. Multiple bins are full.",
+            "location": "Dickmon Road",
+            "latitude": "6.891145",
+            "longitude": "79.859403",
+            "reported_date": "2025-06-10T14:30:00Z",
+            "solved_date": "2025-06-11T10:30:00Z",
+            "status": "Closed",
+            "image_url": "https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.dailymirror.lk/media/images/image_1497466267-89e3d46073.jpg",
+            "reported_by": "Niyola Silva"
+        },
+        {
+            "id": "004",
+            "title": "Blocked Drainages",
+            "description": "Drainage is blocked due to accumulated garbage. Water is stagnating.",
+            "location": "Perahara Mawatha",
+            "latitude": "6.895492",
+            "longitude": "79.858366",
+            "reported_date": "2025-05-09T16:45:00Z",
+            "solved_date": "2025-05-12T15:20:00Z",
+            "status": "Closed",
+            "image_url": "https://www.richmondplumbersandheating.co.uk/wp-content/uploads/2016/08/iStock_35578656_LARGE-1150x647.jpg",
+            "reported_by": "Jagath Perera"
+        },
+        {
+            "id": "005",
+            "title": "Illegal Dumping",
+            "description": "Large amount of construction waste dumped illegally infront of the station.",
+            "location": "Fort Station",
+            "latitude": "6.922136",
+            "longitude": "79.854171",
+            "reported_date": "2025-03-08T08:20:00Z",
+            "solved_date": "2025-03-08T10:50:00Z",
+            "status": "Closed",
+            "image_url": "https://efl.lk/wp-content/uploads/2018/04/IMG-1859.jpg",
+            "reported_by": "Nimal Premasiri"
+        }
+    ]
+}

@@ -219,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             color: const Color.fromARGB(255, 0, 1, 10)),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      prefixIcon: Icon(Icons.lock_outline),
+                      prefixIcon: Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _isConfirmPasswordVisible
