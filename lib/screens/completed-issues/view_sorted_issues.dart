@@ -1,4 +1,5 @@
 import 'package:abans_city_clean_supervisor/models/complete_issue.dart';
+import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -18,15 +19,81 @@ class _SortedIssueDetailsState extends State<SortedIssueDetails> {
     return Scaffold(
       backgroundColor: Color(0xFFF8F9FA), // Light professional background
       appBar: AppBar(
-        title: Text('Completed Issue Details'),
+        title: Text(
+          'Completed Issue Details',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Color(0xFF6A1B9A), // Purple theme
-        foregroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  (route) => false,
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'about',
+                child: Row(
+                  children: [
+                    Icon(Icons.details, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'About Us',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'contact',
+                child: Row(
+                  children: [
+                    Icon(Icons.phone, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'Contact Us',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'Logout',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -185,7 +252,8 @@ class _SortedIssueDetailsState extends State<SortedIssueDetails> {
                         SizedBox(width: 16),
                         // Status Column
                         Expanded(
-                          child: _buildDetailSection('Status', widget.issue.status,
+                          child: _buildDetailSection(
+                              'Status', widget.issue.status,
                               isStatus: true),
                         ),
                       ],

@@ -1,3 +1,5 @@
+import 'package:abans_city_clean_supervisor/screens/active-trucks/active_trucks.dart';
+import 'package:abans_city_clean_supervisor/screens/collection-routes/collection_routes.dart';
 import 'package:abans_city_clean_supervisor/screens/completed-issues/resolved_issues.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/pending-issues/unresolved_issues.dart';
@@ -29,7 +31,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_getAppBarTitle()),
+        title: Text(
+          _getAppBarTitle(),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -229,7 +238,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     'Collection Routes',
                     Icons.local_shipping,
                     iconColorDahsbaord,
-                    () {},
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CollectionRoutesScreen()),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(width: 16),
@@ -239,7 +254,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     'Active Trucks',
                     Icons.fire_truck,
                     iconColorDahsbaord,
-                    () {},
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ActiveTrucksScreen()),
+                      );
+                    },
                   ),
                 ),
               ],

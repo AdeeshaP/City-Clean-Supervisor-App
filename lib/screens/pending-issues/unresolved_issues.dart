@@ -1,4 +1,5 @@
 import 'package:abans_city_clean_supervisor/models/issue.dart';
+import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/pending-issues/view_issue.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -45,10 +46,76 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pending Issues'),
+        title: Text(
+          'Pending Issues',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Color(0xFF6A1B9A),
-        foregroundColor: Colors.white,
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  (route) => false,
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'about',
+                child: Row(
+                  children: [
+                    Icon(Icons.details, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'About Us',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'contact',
+                child: Row(
+                  children: [
+                    Icon(Icons.phone, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'Contact Us',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.grey[600]),
+                    SizedBox(width: 8),
+                    Text(
+                      'Logout',
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
