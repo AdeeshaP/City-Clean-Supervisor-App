@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'package:abans_city_clean_supervisor/constants/color_pallettee.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../../models/collection_route.dart';
 
 class CollectionRoutesScreen extends StatefulWidget {
   @override
@@ -7,18 +11,49 @@ class CollectionRoutesScreen extends StatefulWidget {
 }
 
 class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
+  List<CollectionRoute> collectionRoutes = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadRoutes();
+  }
+
+  void loadRoutes() async {
+    try {
+      // Load the JSON file from assets
+      final String jsonString =
+          await rootBundle.loadString('assets/json/collection_routes.json');
+
+      // Parse the JSON
+      final Map<String, dynamic> jsonData = json.decode(jsonString);
+      final List<dynamic> issuesJson = jsonData['collection_routes'];
+
+      setState(() {
+        collectionRoutes =
+            issuesJson.map((json) => CollectionRoute.fromJson(json)).toList();
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5EFB8),
+      backgroundColor: Color(0xFFF5EFB8),
       appBar: AppBar(
         backgroundColor: Color(0xFF6A1B9A),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Collection Routes',
           style: TextStyle(
             color: Colors.white,
@@ -100,82 +135,28 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(
-            children: [
-              _buildRouteCard(
-                routeName: 'Route A - North Zone',
-                truckId: 'Truck #T-001',
-                startTime: 'Started 07:30',
-                area: 'Kollupitiya - Bambalapitiya',
-                status: 'Active',
-                progress: 0.65,
-                statusColor: Colors.green,
-              ),
-              const SizedBox(height: 12),
-              _buildRouteCard(
-                routeName: 'Route B - Central Zone',
-                truckId: 'Truck #T-003',
-                startTime: 'Started 08:00',
-                area: 'Fort - Pettah - Kotahena',
-                status: 'Active',
-                progress: 0.40,
-                statusColor: Colors.green,
-              ),
-              const SizedBox(height: 12),
-              _buildRouteCard(
-                routeName: 'Route C - South Zone',
-                truckId: 'Truck #T-007',
-                startTime: '06:30 - 09:15',
-                area: 'Wellawatta - Mt.Lavinia',
-                status: 'Completed',
-                progress: 1.0,
-                statusColor: Colors.blue,
-              ),
-              const SizedBox(height: 12),
-              _buildRouteCard(
-                routeName: 'Route D - East Zone',
-                truckId: 'Truck #T-012',
-                startTime: 'Scheduled 10:00',
-                area: 'Battaramulla - Rajagiriya',
-                status: 'Pending',
-                progress: 0.0,
-                statusColor: Colors.orange,
-              ),
-              const SizedBox(height: 12),
-              _buildRouteCard(
-                routeName: 'Route E - West Zone',
-                truckId: 'Truck #T-005',
-                startTime: 'Started 07:45',
-                area: 'Nugegoda - Maharagama',
-                status: 'Active',
-                progress: 0.80,
-                statusColor: Colors.green,
-              ),
-              const SizedBox(height: 80),
-            ],
-          ),
-        ),
+            padding: EdgeInsets.all(5.0),
+            child: ListView.builder(
+                itemCount: collectionRoutes.length,
+                padding: EdgeInsets.all(16),
+                itemBuilder: (context, index) {
+                  final route = collectionRoutes[index];
+                  return _buildRouteCard2(route);
+                })),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: const Color(0xFF8B5A96),
-        child: const Icon(Icons.add, color: Colors.white),
+        // backgroundColor: Color(0xFF8B5A96),
+        backgroundColor: primaryPurpleColor,
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
 
-  Widget _buildRouteCard({
-    required String routeName,
-    required String truckId,
-    required String startTime,
-    required String area,
-    required String status,
-    required double progress,
-    required Color statusColor,
-  }) {
+  Widget _buildRouteCard2(CollectionRoute route) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -183,7 +164,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 8,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
@@ -196,9 +177,9 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
             children: [
               Expanded(
                 child: Text(
-                  routeName,
-                  style: const TextStyle(
-                    color: Color(0xFF8B5A96),
+                  route.routeName,
+                  style: TextStyle(
+                    color: primaryPurpleColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -206,15 +187,15 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               ),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _getStatusBackgroundColor(status),
+                  color: _getStatusBackgroundColor(route.status),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  status,
+                  route.status,
                   style: TextStyle(
-                    color: statusColor,
+                    color: _getStatusTextColor(route.status),
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -222,7 +203,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // Route info
           Row(
@@ -233,12 +214,12 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
                     Icon(
                       Icons.local_shipping,
                       size: 16,
-                      color: Colors.green,
+                      color: Colors.amber,
                     ),
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6),
                     Text(
-                      truckId,
-                      style: const TextStyle(
+                      route.truckId,
+                      style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
                       ),
@@ -251,12 +232,12 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
                   Icon(
                     Icons.access_time,
                     size: 16,
-                    color: Colors.orange,
+                    color: Colors.amber,
                   ),
-                  const SizedBox(width: 6),
+                  SizedBox(width: 6),
                   Text(
-                    startTime,
-                    style: const TextStyle(
+                    route.startTime,
+                    style: TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                     ),
@@ -265,7 +246,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
 
           // Location info
           Row(
@@ -273,13 +254,13 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               Icon(
                 Icons.location_on,
                 size: 16,
-                color: Color(0xFF8B5A96),
+                color: Colors.amber,
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  area,
-                  style: const TextStyle(
+                  route.area,
+                  style: TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
                   ),
@@ -287,7 +268,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
 
           // Progress bar
           Container(
@@ -298,7 +279,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
-              widthFactor: progress,
+              widthFactor: route.progress,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.green,
@@ -315,11 +296,24 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
   Color _getStatusBackgroundColor(String status) {
     switch (status.toLowerCase()) {
       case 'active':
-        return const Color(0xFFE8F5E8);
+        return Color(0xFFE8F5E8);
       case 'completed':
-        return const Color(0xFFE3F2FD);
+        return Color(0xFFE3F2FD);
       case 'pending':
-        return const Color(0xFFFFF3E0);
+        return Color(0xFFFFF3E0);
+      default:
+        return Colors.grey[100]!;
+    }
+  }
+
+  Color _getStatusTextColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'active':
+        return Colors.green;
+      case 'completed':
+        return Colors.blue;
+      case 'pending':
+        return Colors.amber[600]!;
       default:
         return Colors.grey[100]!;
     }

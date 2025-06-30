@@ -1,0 +1,49 @@
+{
+    "collection_routes": [
+        {
+            "id": "001",
+            "routeName": "Route A - North Zone",
+            "truckId": "Truck #T-001",
+            "startTime": "Started 07:30",
+            "area": "Kollupitiya - Bambalapitiya",
+            "status": "Active",
+            "progress": 0.65
+        },
+        {
+            "id": "002",
+            "routeName": "Route B - Central Zone",
+            "truckId": "Truck #T-003",
+            "startTime": "Started 08:00",
+            "area": "Fort - Pettah - Kotahena",
+            "status": "Active",
+            "progress": 0.40
+        },
+        {
+            "id": "003",
+            "routeName": "Route C - South Zone",
+            "truckId": "Truck #T-007",
+            "startTime": "06:30 - 09:15",
+            "area": "Wellawatta - Mt.Lavinia",
+            "status": "Completed",
+            "progress": 1.0
+        },
+        {
+            "id": "004",
+            "routeName": "Route D - East Zone",
+            "truckId": "Truck #T-012",
+            "startTime": "Scheduled 10:00",
+            "area": "Battaramulla - Rajagiriya",
+            "status": "Pending",
+            "progress": 0.0
+        },
+        {
+            "id": "005",
+            "routeName": "Route E - West Zone",
+            "truckId": "Truck #T-005",
+            "startTime": "Started 07:45",
+            "area": "Nugegoda - Maharagama",
+            "status": "Active",
+            "progress": 0.80
+        }
+    ]
+}
