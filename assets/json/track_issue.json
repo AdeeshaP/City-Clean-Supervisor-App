@@ -1,0 +1,55 @@
+{
+  "issues": [
+    {
+      "id": "001",
+      "title": "Overflowing Garbage Bin",
+      "description": "Garbage bin is overflowing and needs immediate attention. Waste is scattered around the area.",
+      "location": "Queens Road",
+      "latitude": "6.898802",
+      "longitude": "79.856213",
+      "reported_date": "2025-06-12T11:24:00Z",
+      "status": "Open",
+      "image_url": "https://i.pinimg.com/736x/5d/f6/f3/5df6f36a6bb928836ec50358bc193025.jpg",
+      "reported_by": "Citizen Reporter",
+      "priority": "High"
+    },
+    {
+      "id": "002",
+      "title": "Missed Collection",
+      "description": "Garbage collection was missed in this area yesterday. Multiple bins are full.",
+      "location": "Wijerama Mawatha, Colombo 7",
+      "latitude": "6.906124",
+      "longitude": "79.873299",
+      "reported_date": "2024-06-16T09:15:00Z",
+      "status": "Open",
+      "image_url": "https://recycling1011.wordpress.com/wp-content/uploads/2021/03/waste_seperation_at_home_111_20.jpg",
+      "reported_by": "John Silva",
+      "priority": "Medium"
+    },
+    {
+      "id": "003",
+      "title": "Broken Waste Container",
+      "description": "The waste container is damaged and cannot hold garbage properly. Needs replacement.",
+      "location": "Near Visaka Vidyalaya, Vajira Road",
+      "latitude": "6.891145",
+      "longitude": "79.859403",
+      "reported_date": "2025-06-10T14:30:00Z",
+      "status": "Open",
+      "image_url": "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=400&h=300&fit=crop",
+      "reported_by": "Maria Fernando",
+      "priority": "High"
+    },{
+      "id": "004",
+      "title": "Illegal Dumping",
+      "description": "arge amount of construction waste dumped illegally on the roadside.",
+      "location": "Dehiwala",
+      "latitude": "6.856347",
+      "longitude": "79.865248",
+      "reported_date": "2025-07-05T10:45:00Z",
+      "status": "Open",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxWKGxNS8Kqer_KM7A3jPKFdYUnxMz8xzEGQ&s",
+      "reported_by": "Wajira Wikramasinghe",
+      "priority": "Low"
+    }
+  ]
+}

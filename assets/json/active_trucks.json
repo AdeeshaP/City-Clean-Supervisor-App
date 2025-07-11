@@ -1,0 +1,64 @@
+{
+    "active_trucks": [
+        {
+            "id": "001",
+            "truckId": "Truck #T-001",
+            "location": "Kollupitiya",
+            "route": "Route A",
+            "driver": "Ravi Silva",
+            "fuel": "85%",
+            "status": "Active",
+            "collections": 12,
+            "distance": "4.2km",
+            "duration": "2.5h"
+        },
+        {
+            "id": "002",
+            "truckId": "Truck #T-003",
+            "location": "Fort Area",
+            "route": "Route B",
+            "driver": "Sunil Perera",
+            "fuel": "72%",
+            "status": "Active",
+            "collections": 8,
+            "distance": "3.1km",
+            "duration": "1.8h"
+        },
+        {
+            "id": "003",
+            "truckId": "Truck #T-005",
+            "location": "Nugegoda",
+            "route": "Route E",
+            "driver": "Kamal Fernando",
+            "fuel": "91%",
+            "status": "Active",
+            "collections": 15,
+            "distance": "5.8km",
+            "duration": "3.2h"
+        },
+        {
+            "id": "004",
+            "truckId": "Truck #T-007",
+            "location": "Cinnamon Garden",
+            "route": "Route C",
+            "driver": "Nimal Jayasinghe",
+            "fuel": "45%",
+            "status": "Active",
+            "collections": 18,
+            "distance": "8.4km",
+            "duration": "4.5h"
+        },
+        {
+            "id": "005",
+            "truckId": "Truck #T-012",
+            "location": "Union Place",
+            "route": "Route D",
+            "driver": "Priyantha Dias",
+            "fuel": "60%",
+            "status": "Active",
+            "collections": 0,
+            "distance": "0km",
+            "duration": "0h"
+        }
+    ]
+}

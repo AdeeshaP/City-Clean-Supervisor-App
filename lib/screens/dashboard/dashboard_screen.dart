@@ -2,7 +2,10 @@ import 'package:abans_city_clean_supervisor/screens/active-trucks/active_trucks.
 import 'package:abans_city_clean_supervisor/screens/collection-routes/collection_routes.dart';
 import 'package:abans_city_clean_supervisor/screens/completed-issues/resolved_issues.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
+import 'package:abans_city_clean_supervisor/screens/issue-tracking/issue_tracker_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/pending-issues/unresolved_issues.dart';
+import 'package:abans_city_clean_supervisor/screens/route-management/route_management_screen.dart';
+import 'package:abans_city_clean_supervisor/screens/schedule-management/schedule_management_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/color_pallettee.dart';
@@ -164,6 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Color(0xFFFFC107).withOpacity(0.3),
             Color(0xFFFFF8E1),
             Color(0xFFFFFBE6),
+            // Color(0xFFFFC107).withOpacity(0.3),
           ],
         ),
       ),
@@ -319,13 +323,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Column(
               children: [
                 _buildGarbageActionItem(
-                  icon: Icons.route,
-                  title: 'Route Management',
-                  subtitle: 'Plan and monitor collection routes',
-                  // color: iconColorDahsbaord,
-                  color: iconColorDahsbaord,
-                  onTap: () => _showComingSoon(context),
-                ),
+                    icon: Icons.route,
+                    title: 'Route Management',
+                    subtitle: 'Plan and monitor collection routes',
+                    // color: iconColorDahsbaord,
+                    color: iconColorDahsbaord,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RouteManagementScreen()),
+                      );
+                    }),
                 SizedBox(height: 12),
                 _buildGarbageActionItem(
                   icon: Icons.report_problem,
@@ -334,7 +343,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   // color: Color(0xFFFF9800),
                   color: iconColorDahsbaord,
 
-                  onTap: () => _showComingSoon(context),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => IssueTrackerScreen()),
+                    );
+                  },
                 ),
                 SizedBox(height: 12),
                 _buildGarbageActionItem(
@@ -348,14 +363,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 SizedBox(height: 12),
                 _buildGarbageActionItem(
-                  icon: Icons.schedule,
-                  title: 'Schedule Management',
-                  subtitle: 'Manage collection schedules and shifts',
-                  // color: Color(0xFF9C27B0),
-                  color: iconColorDahsbaord,
-
-                  onTap: () => _showComingSoon(context),
-                ),
+                    icon: Icons.schedule,
+                    title: 'Schedule Management',
+                    subtitle: 'Manage collection schedules and shifts',
+                    // color: Color(0xFF9C27B0),
+                    color: iconColorDahsbaord,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScheduleManagementScreen()),
+                      );
+                    }),
               ],
             ),
 

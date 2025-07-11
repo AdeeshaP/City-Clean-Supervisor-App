@@ -45,7 +45,6 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5EFB8),
       appBar: AppBar(
         backgroundColor: Color(0xFF6A1B9A),
         leading: IconButton(
@@ -131,18 +130,17 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               Color(0xFFFFC107).withOpacity(0.3),
               Color(0xFFFFF8E1),
               Color(0xFFFFFBE6),
+              Color(0xFFFFC107).withOpacity(0.3),
             ],
           ),
         ),
-        child: Padding(
-            padding: EdgeInsets.all(5.0),
-            child: ListView.builder(
-                itemCount: collectionRoutes.length,
-                padding: EdgeInsets.all(16),
-                itemBuilder: (context, index) {
-                  final route = collectionRoutes[index];
-                  return _buildRouteCard2(route);
-                })),
+        child: ListView.builder(
+            itemCount: collectionRoutes.length,
+            padding: EdgeInsets.all(16),
+            itemBuilder: (context, index) {
+              final route = collectionRoutes[index];
+              return _buildRouteCard2(route);
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -186,8 +184,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
                 ),
               ),
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: _getStatusBackgroundColor(route.status),
                   borderRadius: BorderRadius.circular(20),
