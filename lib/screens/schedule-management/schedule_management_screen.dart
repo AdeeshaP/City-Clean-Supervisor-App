@@ -1,6 +1,8 @@
 import 'package:abans_city_clean_supervisor/constants/color_pallettee.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/schedule-management/create_new_schedule.dart';
+import 'package:abans_city_clean_supervisor/screens/schedule-management/schedule_templates.dart';
+import 'package:abans_city_clean_supervisor/screens/schedule-management/view_all_schedules.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleManagementScreen extends StatefulWidget {
@@ -155,27 +157,40 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CreateNewScheduleScreen()),
+                    builder: (context) => CreateNewScheduleScreen(),
+                  ),
                 ),
               ),
 
               SizedBox(height: 12),
 
               _buildActionCard(
-                  title: 'View All Schedules',
-                  subtitle: 'Browse and manage existing schedules',
-                  icon: Icons.calendar_view_week,
-                  color: iconColorDahsbaord,
-                  onTap: () => {}),
+                title: 'View All Schedules',
+                subtitle: 'Browse and manage existing schedules',
+                icon: Icons.calendar_view_week,
+                color: iconColorDahsbaord,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewAllSchedulesScreen(),
+                  ),
+                ),
+              ),
 
               SizedBox(height: 12),
 
               _buildActionCard(
-                  title: 'Schedule Templates',
-                  subtitle: 'Create reusable schedule templates',
-                  icon: Icons.content_copy,
-                  color: iconColorDahsbaord,
-                  onTap: () => {}),
+                title: 'Schedule Templates',
+                subtitle: 'Create reusable schedule templates',
+                icon: Icons.content_copy,
+                color: iconColorDahsbaord,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ScheduleTemplatesScreen(),
+                  ),
+                ),
+              ),
 
               SizedBox(height: 12),
 
@@ -187,66 +202,6 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                   onTap: () => {}),
 
               SizedBox(height: 24),
-
-              // Recent Activity
-              // Text(
-              //   'Recent Activity',
-              //   style: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: Color(0xFF7B3F98),
-              //   ),
-              // ),
-
-              // SizedBox(height: 16),
-
-              // Container(
-              //   height: 300,
-              //   padding: EdgeInsets.all(16),
-              //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     borderRadius: BorderRadius.circular(12),
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Colors.grey.withOpacity(0.1),
-              //         spreadRadius: 1,
-              //         blurRadius: 5,
-              //         offset: Offset(0, 2),
-              //       ),
-              //     ],
-              //   ),
-              //   child: Column(
-              //     children: [
-              //       _buildActivityItem(
-              //         title: 'Route A schedule updated',
-              //         time: '2 hours ago',
-              //         icon: Icons.edit,
-              //         color: Colors.blue,
-              //       ),
-              //       Divider(height: 20),
-              //       _buildActivityItem(
-              //         title: 'New schedule created for Route F',
-              //         time: '5 hours ago',
-              //         icon: Icons.add,
-              //         color: Colors.green,
-              //       ),
-              //       Divider(height: 20),
-              //       _buildActivityItem(
-              //         title: 'Route C schedule cancelled',
-              //         time: '1 day ago',
-              //         icon: Icons.cancel,
-              //         color: Colors.red,
-              //       ),
-              //       Divider(height: 20),
-              //       _buildActivityItem(
-              //         title: 'Weekly template applied',
-              //         time: '2 days ago',
-              //         icon: Icons.schedule,
-              //         color: Colors.purple,
-              //       ),
-              // ],
-              // ),
-              // ),
             ],
           ),
         ),
@@ -440,5 +395,4 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
 //     );
 //   }
 // }
-
 }

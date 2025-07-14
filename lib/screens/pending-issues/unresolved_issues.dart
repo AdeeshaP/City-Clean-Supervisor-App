@@ -119,49 +119,52 @@ class _PendingIssuesScreenState extends State<PendingIssuesScreen> {
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
-          : Container(
-              // color: Color(0xFFF5F5F5),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFFFFC107).withOpacity(0.3),
-                    Color(0xFFFFF8E1),
-                    Color(0xFFFFFBE6),
-                  ],
+          : SafeArea(
+            child: Container(
+                // color: Color(0xFFF5F5F5),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFFFC107).withOpacity(0.3),
+                      Color(0xFFFFF8E1),
+                      Color(0xFFFFFBE6),
+                      Color(0xFFFFC107).withOpacity(0.3),
+                    ],
+                  ),
                 ),
-              ),
-              child: pendingIssues.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.check_circle,
-                            size: 64,
-                            color: Colors.grey[400],
-                          ),
-                          SizedBox(height: 16),
-                          Text(
-                            'No Pending Issues',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey[600],
+                child: pendingIssues.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.check_circle,
+                              size: 64,
+                              color: Colors.grey[400],
                             ),
-                          ),
-                        ],
+                            SizedBox(height: 16),
+                            Text(
+                              'No Pending Issues',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.all(16),
+                        itemCount: pendingIssues.length,
+                        itemBuilder: (context, index) {
+                          final issue = pendingIssues[index];
+                          return _buildIssueCard(issue);
+                        },
                       ),
-                    )
-                  : ListView.builder(
-                      padding: EdgeInsets.all(16),
-                      itemCount: pendingIssues.length,
-                      itemBuilder: (context, index) {
-                        final issue = pendingIssues[index];
-                        return _buildIssueCard(issue);
-                      },
-                    ),
-            ),
+              ),
+          ),
     );
   }
 

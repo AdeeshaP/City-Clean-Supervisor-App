@@ -42,6 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -105,7 +106,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       body: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFFFC107).withOpacity(0.3),
+              Color(0xFFFFF8E1),
+              Color(0xFFFFFBE6),
+              Color(0xFFFFC107).withOpacity(0.3),
+            ],
+          ),
+        ),
         child: _screens[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -159,18 +171,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildDashboardContent() {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFFFC107).withOpacity(0.3),
-            Color(0xFFFFF8E1),
-            Color(0xFFFFFBE6),
-            // Color(0xFFFFC107).withOpacity(0.3),
-          ],
-        ),
-      ),
       child: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -351,16 +351,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     );
                   },
                 ),
-                SizedBox(height: 12),
-                _buildGarbageActionItem(
-                  icon: Icons.analytics,
-                  title: 'Performance Reports',
-                  subtitle: 'View collection statistics and trends',
-                  // color: Color(0xFF2196F3),
-                  color: iconColorDahsbaord,
+                // SizedBox(height: 12),
+                // _buildGarbageActionItem(
+                //   icon: Icons.analytics,
+                //   title: 'Performance Reports',
+                //   subtitle: 'View collection statistics and trends',
+                //   // color: Color(0xFF2196F3),
+                //   color: iconColorDahsbaord,
 
-                  onTap: () => _showComingSoon(context),
-                ),
+                //   onTap: () => _showComingSoon(context),
+                // ),
                 SizedBox(height: 12),
                 _buildGarbageActionItem(
                     icon: Icons.schedule,

@@ -238,24 +238,27 @@ class _RouteManagementScreenState extends State<RouteManagementScreen>
         onPressed: () => _showAddRouteDialog(),
         child: Icon(Icons.add, color: Colors.white),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFFC107).withOpacity(0.3),
-              Color(0xFFFFF8E1),
-              Color(0xFFFFFBE6),
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFFFC107).withOpacity(0.3),
+                Color(0xFFFFF8E1),
+                Color(0xFFFFFBE6),
+                Color(0xFFFFC107).withOpacity(0.3),
+              ],
+            ),
+          ),
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildRoutesListView(),
+              _buildMapView(),
             ],
           ),
-        ),
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            _buildRoutesListView(),
-            _buildMapView(),
-          ],
         ),
       ),
     );
