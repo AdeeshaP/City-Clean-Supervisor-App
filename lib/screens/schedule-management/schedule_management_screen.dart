@@ -1,6 +1,7 @@
 import 'package:abans_city_clean_supervisor/constants/color_pallettee.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/schedule-management/create_new_schedule.dart';
+import 'package:abans_city_clean_supervisor/screens/schedule-management/schedule_reports.dart';
 import 'package:abans_city_clean_supervisor/screens/schedule-management/schedule_templates.dart';
 import 'package:abans_city_clean_supervisor/screens/schedule-management/view_all_schedules.dart';
 import 'package:flutter/material.dart';
@@ -195,12 +196,17 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
               SizedBox(height: 12),
 
               _buildActionCard(
-                  title: 'Schedule Reports',
-                  subtitle: 'View schedule performance and analytics',
-                  icon: Icons.bar_chart,
-                  color: iconColorDahsbaord,
-                  onTap: () => {}),
-
+                title: 'Schedule Reports',
+                subtitle: 'View schedule performance and analytics',
+                icon: Icons.bar_chart,
+                color: iconColorDahsbaord,
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ScheduleReportsScreen(),
+                  ),
+                ),
+              ),
               SizedBox(height: 24),
             ],
           ),

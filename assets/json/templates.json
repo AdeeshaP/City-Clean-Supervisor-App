@@ -1,0 +1,72 @@
+{
+  "templates": [
+    {
+      "id": "TPL001",
+      "name": "Daily Residential Collection",
+      "category": "Daily",
+      "description": "Standard daily collection template for residential areas",
+      "frequency": "Daily",
+      "duration": "4 hours",
+      "routes": 3,
+      "trucks": 2,
+      "crews": 6,
+      "timeSlots": ["08:00 AM - 12:00 PM", "01:00 PM - 05:00 PM"],
+      "usageCount": 15,
+      "lastUsed": "2024-01-15",
+      "isActive": true,
+      "creator": "Admin",
+      "zones": ["North Zone", "Central Zone"]
+    },
+    {
+      "id": "TPL002",
+      "name": "Weekly Commercial Collection",
+      "category": "Weekly",
+      "description": "Weekly collection template for commercial districts",
+      "frequency": "Weekly",
+      "duration": "6 hours",
+      "routes": 2,
+      "trucks": 3,
+      "crews": 9,
+      "timeSlots": ["06:00 AM - 12:00 PM"],
+      "usageCount": 8,
+      "lastUsed": "2024-01-12",
+      "isActive": true,
+      "creator": "Manager",
+      "zones": ["Commercial District", "Industrial Zone"]
+    },
+    {
+      "id": "TPL003",
+      "name": "Monthly Bulk Waste",
+      "category": "Monthly",
+      "description": "Monthly bulk waste collection template",
+      "frequency": "Monthly",
+      "duration": "8 hours",
+      "routes": 5,
+      "trucks": 4,
+      "crews": 12,
+      "timeSlots": ["07:00 AM - 03:00 PM"],
+      "usageCount": 3,
+      "lastUsed": "2024-01-01",
+      "isActive": true,
+      "creator": "Supervisor",
+      "zones": ["All Zones"]
+    },
+    {
+      "id": "TPL004",
+      "name": "Holiday Schedule",
+      "category": "Custom",
+      "description": "Special schedule template for holidays",
+      "frequency": "Custom",
+      "duration": "2 hours",
+      "routes": 1,
+      "trucks": 1,
+      "crews": 3,
+      "timeSlots": ["10:00 AM - 12:00 PM"],
+      "usageCount": 5,
+      "lastUsed": "2024-01-10",
+      "isActive": false,
+      "creator": "Admin",
+      "zones": ["Priority Areas"]
+    }
+  ]
+}

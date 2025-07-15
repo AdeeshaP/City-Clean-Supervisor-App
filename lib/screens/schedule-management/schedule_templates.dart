@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:abans_city_clean_supervisor/constants/color_pallettee.dart';
+import 'package:abans_city_clean_supervisor/models/schedule_template.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ScheduleTemplatesScreen extends StatefulWidget {
   @override
@@ -17,85 +20,36 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
     'Monthly',
     'Custom'
   ];
+  bool isLoading = true;
 
-  // Sample template data
-  final List<Map<String, dynamic>> templates = [
-    {
-      'id': 'TPL001',
-      'name': 'Daily Residential Collection',
-      'category': 'Daily',
-      'description': 'Standard daily collection template for residential areas',
-      'frequency': 'Daily',
-      'duration': '4 hours',
-      'routes': 3,
-      'trucks': 2,
-      'crews': 6,
-      'timeSlots': ['08:00 AM - 12:00 PM', '01:00 PM - 05:00 PM'],
-      'usageCount': 15,
-      'lastUsed': '2024-01-15',
-      'isActive': true,
-      'creator': 'Admin',
-      'zones': ['North Zone', 'Central Zone'],
-    },
-    {
-      'id': 'TPL002',
-      'name': 'Weekly Commercial Collection',
-      'category': 'Weekly',
-      'description': 'Weekly collection template for commercial districts',
-      'frequency': 'Weekly',
-      'duration': '6 hours',
-      'routes': 2,
-      'trucks': 3,
-      'crews': 9,
-      'timeSlots': ['06:00 AM - 12:00 PM'],
-      'usageCount': 8,
-      'lastUsed': '2024-01-12',
-      'isActive': true,
-      'creator': 'Manager',
-      'zones': ['Commercial District', 'Industrial Zone'],
-    },
-    {
-      'id': 'TPL003',
-      'name': 'Monthly Bulk Waste',
-      'category': 'Monthly',
-      'description': 'Monthly bulk waste collection template',
-      'frequency': 'Monthly',
-      'duration': '8 hours',
-      'routes': 5,
-      'trucks': 4,
-      'crews': 12,
-      'timeSlots': ['07:00 AM - 03:00 PM'],
-      'usageCount': 3,
-      'lastUsed': '2024-01-01',
-      'isActive': true,
-      'creator': 'Supervisor',
-      'zones': ['All Zones'],
-    },
-    {
-      'id': 'TPL004',
-      'name': 'Holiday Schedule',
-      'category': 'Custom',
-      'description': 'Special schedule template for holidays',
-      'frequency': 'Custom',
-      'duration': '2 hours',
-      'routes': 1,
-      'trucks': 1,
-      'crews': 3,
-      'timeSlots': ['10:00 AM - 12:00 PM'],
-      'usageCount': 5,
-      'lastUsed': '2024-01-10',
-      'isActive': false,
-      'creator': 'Admin',
-      'zones': ['Priority Areas'],
-    },
-  ];
+  List<CollectionTemplate> scheduleTemplates = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadTemplates();
+  }
+
+  Future<void> loadTemplates() async {
+    final String jsonString =
+        await rootBundle.loadString('assets/json/templates.json');
+    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+
+    final List<dynamic> jsonList = jsonMap['templates'];
+
+    setState(() {
+      scheduleTemplates =
+          jsonList.map((json) => CollectionTemplate.fromJson(json)).toList();
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final filteredTemplates = selectedCategory == 'All'
-        ? templates
-        : templates
-            .where((template) => template['category'] == selectedCategory)
+        ? scheduleTemplates
+        : scheduleTemplates
+            .where((template) => template.category == selectedCategory)
             .toList();
 
     return Scaffold(
@@ -115,12 +69,6 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
         centerTitle: true,
         backgroundColor: Color(0xFF6A1B9A),
         actions: [
-          IconButton(
-            icon: Icon(Icons.add, color: Colors.white),
-            onPressed: () {
-              _showCreateTemplateDialog();
-            },
-          ),
           PopupMenuButton(
             onSelected: (value) {
               if (value == 'logout') {
@@ -166,119 +114,126 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
           ),
         ],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFFC107).withOpacity(0.3),
-              Color(0xFFFFF8E1),
-              Color(0xFFFFFBE6),
-              Color(0xFFFFC107).withOpacity(0.3),
-            ],
+      body: SafeArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFFFC107).withOpacity(0.3),
+                Color(0xFFFFF8E1),
+                Color(0xFFFFFBE6),
+                Color(0xFFFFC107).withOpacity(0.3),
+              ],
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            // Category Filter
-            Container(
-              padding: EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: categories.map((category) {
-                    bool isSelected = selectedCategory == category;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedCategory = category;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 8),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: isSelected ? primaryPurpleColor : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              offset: Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          category,
-                          style: TextStyle(
+          child: Column(
+            children: [
+              // Category Filter
+              Container(
+                padding: EdgeInsets.all(16),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: categories.map((category) {
+                      bool isSelected = selectedCategory == category;
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedCategory = category;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 5),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                            // color:
+                            //     isSelected ? primaryPurpleColor : Colors.white,
+                            // borderRadius: BorderRadius.circular(20),
                             color:
-                                isSelected ? Colors.white : Color(0xFF7B3F98),
-                            fontWeight: FontWeight.w600,
+                                isSelected ? Color(0xFFFFC107) : Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            category,
+                            style: TextStyle(
+                              // color:
+                              //     isSelected ? Colors.white : Color(0xFF7B3F98),
+                              color: isSelected ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
-            ),
 
-            // Template Count
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${filteredTemplates.length} Templates',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF7B3F98),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.grid_view, color: Color(0xFF7B3F98)),
-                        onPressed: () {
-                          // Toggle grid view
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.sort, color: Color(0xFF7B3F98)),
-                        onPressed: () {
-                          // Sort templates
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // Templates List
-            Expanded(
-              child: ListView.builder(
+              // Template Count
+              Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                itemCount: filteredTemplates.length,
-                itemBuilder: (context, index) {
-                  final template = filteredTemplates[index];
-                  return _buildTemplateCard(template);
-                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${filteredTemplates.length} Templates',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF7B3F98),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.grid_view, color: Color(0xFF7B3F98)),
+                          onPressed: () {
+                            // Toggle grid view
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.sort, color: Color(0xFF7B3F98)),
+                          onPressed: () {
+                            // Sort templates
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+
+              // Templates List
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: filteredTemplates.length,
+                  itemBuilder: (context, index) {
+                    final template = filteredTemplates[index];
+                    return _buildTemplateCard(template);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTemplateCard(Map<String, dynamic> template) {
+  Widget _buildTemplateCard(CollectionTemplate template) {
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -307,19 +262,6 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
             ),
             child: Row(
               children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: primaryPurpleColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    Icons.content_copy,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-                SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -328,7 +270,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              template['name'],
+                              template.name,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -338,18 +280,20 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
+                                horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
-                              color: template['isActive']
-                                  ? Colors.green
-                                  : Colors.grey,
-                              borderRadius: BorderRadius.circular(12),
+                              color: template.isActive
+                                  ? Colors.green.withOpacity(0.2)
+                                  : Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              template['isActive'] ? 'Active' : 'Inactive',
+                              template.isActive ? 'Active' : 'Inactive',
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
+                                color: template.isActive
+                                    ? Colors.green
+                                    : Colors.grey,
+                                fontSize: 11,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -358,7 +302,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        template['description'],
+                        template.description,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[600],
@@ -382,21 +326,21 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                     Expanded(
                       child: _buildStatItem(
                         Icons.schedule,
-                        template['frequency'],
+                        template.frequency,
                         'Frequency',
                       ),
                     ),
                     Expanded(
                       child: _buildStatItem(
                         Icons.access_time,
-                        template['duration'],
+                        template.duration,
                         'Duration',
                       ),
                     ),
                     Expanded(
                       child: _buildStatItem(
                         Icons.trending_up,
-                        template['usageCount'].toString(),
+                        template.usageCount.toString(),
                         'Used',
                       ),
                     ),
@@ -419,8 +363,8 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                         'Resources Required',
                         style: TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF7B3F98),
+                          fontWeight: FontWeight.w500,
+                          // color: Color(0xFF7B3F98),
                         ),
                       ),
                       SizedBox(height: 8),
@@ -428,11 +372,11 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           _buildResourceItem(
-                              Icons.route, template['routes'], 'Routes'),
-                          _buildResourceItem(Icons.local_shipping,
-                              template['trucks'], 'Trucks'),
+                              Icons.route, template.routes, 'Routes'),
                           _buildResourceItem(
-                              Icons.group, template['crews'], 'Crews'),
+                              Icons.local_shipping, template.trucks, 'Trucks'),
+                          _buildResourceItem(
+                              Icons.group, template.crews, 'Crews'),
                         ],
                       ),
                     ],
@@ -442,11 +386,12 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                 SizedBox(height: 16),
 
                 // Time Slots
-                if (template['timeSlots'].isNotEmpty)
+                if (template.timeSlots.isNotEmpty)
                   Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.blue[50],
+                      color: Colors.amber[50],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -461,23 +406,22 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 4,
-                          children: template['timeSlots'].map<Widget>((slot) {
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: template.timeSlots.map<Widget>((slot) {
                             return Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: Colors.amber,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
                                 slot,
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold),
                               ),
                             );
                           }).toList(),
@@ -495,6 +439,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                     color: Colors.amber[50],
                     borderRadius: BorderRadius.circular(8),
                   ),
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -508,7 +453,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        template['zones'].join(', '),
+                        template.zones.join(', '),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey[700],
@@ -531,22 +476,10 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                       () => _viewTemplate(template),
                     ),
                     _buildActionButton(
-                      Icons.play_arrow,
-                      'Use',
-                      Colors.green,
-                      () => _useTemplate(template),
-                    ),
-                    _buildActionButton(
                       Icons.edit,
                       'Edit',
                       Colors.orange,
                       () => _editTemplate(template),
-                    ),
-                    _buildActionButton(
-                      Icons.copy,
-                      'Clone',
-                      Colors.purple,
-                      () => _cloneTemplate(template),
                     ),
                     _buildActionButton(
                       Icons.delete,
@@ -567,7 +500,11 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
   Widget _buildStatItem(IconData icon, String value, String label) {
     return Column(
       children: [
-        Icon(icon, color: primaryPurpleColor, size: 20),
+        Icon(
+          icon,
+          color: Colors.green,
+          size: 20,
+        ),
         SizedBox(height: 4),
         Text(
           value,
@@ -580,7 +517,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
         Text(
           label,
           style: TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             color: Colors.grey[600],
           ),
         ),
@@ -591,12 +528,12 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
   Widget _buildResourceItem(IconData icon, int count, String label) {
     return Column(
       children: [
-        Icon(icon, color: primaryPurpleColor, size: 18),
+        Icon(icon, color: primaryGreen, size: 18),
         SizedBox(height: 4),
         Text(
           count.toString(),
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color(0xFF7B3F98),
           ),
@@ -604,7 +541,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
         Text(
           label,
           style: TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             color: Colors.grey[600],
           ),
         ),
@@ -640,73 +577,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
     );
   }
 
-  void _showCreateTemplateDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Create New Template'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Template Name',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-              ),
-              SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Category',
-                  border: OutlineInputBorder(),
-                ),
-                items: ['Daily', 'Weekly', 'Monthly', 'Custom'].map((category) {
-                  return DropdownMenuItem(
-                    value: category,
-                    child: Text(category),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  // Handle category change
-                },
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Template created successfully!'),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            },
-            style:
-                ElevatedButton.styleFrom(backgroundColor: primaryPurpleColor),
-            child: Text('Create', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _viewTemplate(Map<String, dynamic> template) {
+  void _viewTemplate(CollectionTemplate template) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -716,21 +587,21 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildDialogDetailItem('Name', template['name']),
-              _buildDialogDetailItem('Category', template['category']),
-              _buildDialogDetailItem('Description', template['description']),
-              _buildDialogDetailItem('Frequency', template['frequency']),
-              _buildDialogDetailItem('Duration', template['duration']),
-              _buildDialogDetailItem('Routes', template['routes'].toString()),
-              _buildDialogDetailItem('Trucks', template['trucks'].toString()),
-              _buildDialogDetailItem('Crews', template['crews'].toString()),
+              _buildDialogDetailItem('Name', template.name),
+              _buildDialogDetailItem('Category', template.category),
+              _buildDialogDetailItem('Description', template.description),
+              _buildDialogDetailItem('Frequency', template.frequency),
+              _buildDialogDetailItem('Duration', template.duration),
+              _buildDialogDetailItem('Routes', template.routes.toString()),
+              _buildDialogDetailItem('Trucks', template.trucks.toString()),
+              _buildDialogDetailItem('Crews', template.crews.toString()),
               _buildDialogDetailItem(
-                  'Usage Count', template['usageCount'].toString()),
-              _buildDialogDetailItem('Last Used', template['lastUsed']),
-              _buildDialogDetailItem('Creator', template['creator']),
-              _buildDialogDetailItem('Zones', template['zones'].join(', ')),
+                  'Usage Count', template.usageCount.toString()),
+              _buildDialogDetailItem('Last Used', template.lastUsed),
+              _buildDialogDetailItem('Creator', template.creator),
+              _buildDialogDetailItem('Zones', template.zones.join(', ')),
               _buildDialogDetailItem(
-                  'Time Slots', template['timeSlots'].join(', ')),
+                  'Time Slots', template.timeSlots.join(', ')),
             ],
           ),
         ),
@@ -771,39 +642,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
     );
   }
 
-  void _useTemplate(Map<String, dynamic> template) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Use Template'),
-        content: Text(
-            'Create a new schedule based on "${template['name']}" template?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content:
-                      Text('Redirecting to create schedule with template...'),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            },
-            style:
-                ElevatedButton.styleFrom(backgroundColor: primaryPurpleColor),
-            child: Text('Use Template', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _editTemplate(Map<String, dynamic> template) {
+  void _editTemplate(CollectionTemplate template) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Edit template functionality to be implemented'),
@@ -812,22 +651,13 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
     );
   }
 
-  void _cloneTemplate(Map<String, dynamic> template) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Template cloned successfully!'),
-        backgroundColor: Colors.purple,
-      ),
-    );
-  }
-
-  void _deleteTemplate(Map<String, dynamic> template) {
+  void _deleteTemplate(CollectionTemplate template) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Delete Template'),
         content: Text(
-            'Are you sure you want to delete "${template['name']}" template?'),
+            'Are you sure you want to delete "${template.name}" template?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
