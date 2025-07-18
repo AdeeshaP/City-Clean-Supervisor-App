@@ -440,10 +440,10 @@ class _ViewAllSchedulesScreenState extends State<ViewAllSchedulesScreen> {
                 onPressed: () {
                   _editSchedule(schedule);
                 },
-                icon: Icon(Icons.edit, size: 16, color: Colors.amber[700]),
+                icon: Icon(Icons.edit, size: 16, color: Colors.blue),
                 label: Text('Edit'),
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.amber[700],
+                  foregroundColor: Colors.blue,
                 ),
               ),
               TextButton.icon(

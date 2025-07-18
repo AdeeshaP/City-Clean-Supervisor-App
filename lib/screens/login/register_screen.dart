@@ -30,8 +30,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFFFC107).withOpacity(0.1),
-              Colors.white,
+              Color(0xFFFFC107).withOpacity(0.3),
+              Color(0xFFFFF8E1),
+              Color(0xFFFFFBE6),
             ],
           ),
         ),
@@ -271,7 +272,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 builder: (context) => LoginScreen()),
                           );
                         },
-                        child: Text('Login'),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ],
                   ),

@@ -28,8 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFFFC107).withOpacity(0.1),
-              Colors.white,
+              // Color(0xFFFFC107).withOpacity(0.1),
+              // Colors.white,
+              Color(0xFFFFC107).withOpacity(0.3),
+              Color(0xFFFFF8E1),
+              Color(0xFFFFFBE6),
             ],
           ),
         ),
@@ -85,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       labelText: 'Email',
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.email, color: Colors.grey),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -117,13 +120,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock, color: Colors.grey),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey),
                         onPressed: () {
                           setState(() {
                             _isPasswordVisible = !_isPasswordVisible;
@@ -174,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an account? '),
+                      Text('Don\'t have an account?'),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -183,7 +186,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (context) => RegisterScreen()),
                           );
                         },
-                        child: Text('Register'),
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                     ],
                   ),

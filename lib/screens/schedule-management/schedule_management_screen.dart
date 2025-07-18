@@ -154,7 +154,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 title: 'Create New Schedule',
                 subtitle: 'Add new collection schedule for routes',
                 icon: Icons.add_circle_outline,
-                color: iconColorDahsbaord,
+                color: iconColorDahsbaord2,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -169,7 +169,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 title: 'View All Schedules',
                 subtitle: 'Browse and manage existing schedules',
                 icon: Icons.calendar_view_week,
-                color: iconColorDahsbaord,
+                color: iconColorDahsbaord2,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -184,7 +184,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 title: 'Schedule Templates',
                 subtitle: 'Create reusable schedule templates',
                 icon: Icons.content_copy,
-                color: iconColorDahsbaord,
+                color: iconColorDahsbaord2,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -199,7 +199,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 title: 'Schedule Reports',
                 subtitle: 'View schedule performance and analytics',
                 icon: Icons.bar_chart,
-                color: iconColorDahsbaord,
+                color: iconColorDahsbaord2,
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -251,7 +251,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF7B3F98),
+              color: Color(0xFF6A1B9A),
             ),
           ),
           SizedBox(height: 4),

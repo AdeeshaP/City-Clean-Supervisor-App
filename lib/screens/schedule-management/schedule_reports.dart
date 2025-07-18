@@ -251,7 +251,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'Total Schedules',
                               scheduleStats['totalSchedules'].toString(),
                               Icons.calendar_today,
-                              primaryGreen,
+                              iconColorDahsbaord2,
                             ),
                           ),
                           SizedBox(width: 12),
@@ -260,7 +260,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'Active',
                               scheduleStats['activeSchedules'].toString(),
                               Icons.play_circle,
-                              Colors.green,
+                              iconColorDahsbaord2,
                             ),
                           ),
                         ],
@@ -275,7 +275,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'Completed',
                               scheduleStats['completedSchedules'].toString(),
                               Icons.check_circle,
-                              primaryGreen,
+                              iconColorDahsbaord2,
                             ),
                           ),
                           SizedBox(width: 12),
@@ -284,7 +284,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'Pending',
                               scheduleStats['pendingSchedules'].toString(),
                               Icons.pending,
-                              primaryGreen,
+                              iconColorDahsbaord2,
                             ),
                           ),
                         ],
@@ -299,7 +299,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'On Time %',
                               '${scheduleStats['onTimeCompletion']}%',
                               Icons.schedule,
-                              primaryGreen,
+                              iconColorDahsbaord2,
                             ),
                           ),
                           SizedBox(width: 12),
@@ -308,7 +308,7 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
                               'Avg Delay',
                               '${scheduleStats['averageDelay']} min',
                               Icons.timer,
-                              primaryGreen,
+                              iconColorDahsbaord2,
                             ),
                           ),
                         ],
@@ -746,23 +746,6 @@ class _ScheduleReportsScreenState extends State<ScheduleReportsScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  // Action Methods
-  void _exportReport() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Export Report'),
-        content: Text('Report exported successfully!'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
-          ),
-        ],
       ),
     );
   }

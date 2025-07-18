@@ -1,4 +1,4 @@
-import 'package:abans_city_clean_supervisor/models/issue.dart';
+import 'package:abans_city_clean_supervisor/models/pending_issue.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/pending-issues/view_issue.dart';
 import 'package:flutter/material.dart';

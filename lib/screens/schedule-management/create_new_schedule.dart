@@ -287,7 +287,6 @@ class _CreateNewScheduleScreenState extends State<CreateNewScheduleScreen> {
                         child: ElevatedButton(
                           onPressed: _createSchedule,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryPurpleColor,
                             padding: EdgeInsets.symmetric(vertical: 16),
                           ),
                           child: Text(

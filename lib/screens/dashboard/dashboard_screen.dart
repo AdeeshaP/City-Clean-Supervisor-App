@@ -6,6 +6,7 @@ import 'package:abans_city_clean_supervisor/screens/issue-tracking/issue_tracker
 import 'package:abans_city_clean_supervisor/screens/pending-issues/unresolved_issues.dart';
 import 'package:abans_city_clean_supervisor/screens/route-management/route_management_screen.dart';
 import 'package:abans_city_clean_supervisor/screens/schedule-management/schedule_management_screen.dart';
+import 'package:abans_city_clean_supervisor/screens/view-reports/view_reports_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/color_pallettee.dart';
@@ -240,8 +241,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: _buildGarbageStatCard(
                     '15',
                     'Collection Routes',
-                    Icons.local_shipping,
-                    iconColorDahsbaord,
+                    Icons.route,
+                    iconColorDahsbaord2,
                     () {
                       Navigator.push(
                         context,
@@ -257,7 +258,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '28',
                     'Active Trucks',
                     Icons.fire_truck,
-                    iconColorDahsbaord,
+                    iconColorDahsbaord2,
                     () {
                       Navigator.push(
                         context,
@@ -277,7 +278,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '6',
                     'Pending Issues',
                     Icons.warning,
-                    iconColorDahsbaord,
+                    iconColorDahsbaord2,
                     () {
                       Navigator.push(
                         context,
@@ -293,7 +294,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     '42',
                     'Completed Today',
                     Icons.check_circle,
-                    iconColorDahsbaord,
+                    iconColorDahsbaord2,
                     () {
                       Navigator.push(
                         context,
@@ -327,7 +328,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     title: 'Route Management',
                     subtitle: 'Plan and monitor collection routes',
                     // color: iconColorDahsbaord,
-                    color: iconColorDahsbaord,
+                    color: iconColorDahsbaord2,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -341,7 +342,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   title: 'Issue Tracking',
                   subtitle: 'Monitor and resolve collection issues',
                   // color: Color(0xFFFF9800),
-                  color: iconColorDahsbaord,
+                  color: iconColorDahsbaord2,
 
                   onTap: () {
                     Navigator.push(
@@ -351,23 +352,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     );
                   },
                 ),
-                // SizedBox(height: 12),
-                // _buildGarbageActionItem(
-                //   icon: Icons.analytics,
-                //   title: 'Performance Reports',
-                //   subtitle: 'View collection statistics and trends',
-                //   // color: Color(0xFF2196F3),
-                //   color: iconColorDahsbaord,
-
-                //   onTap: () => _showComingSoon(context),
-                // ),
+                SizedBox(height: 12),
+                _buildGarbageActionItem(
+                  icon: Icons.analytics,
+                  title: 'View Reports',
+                  subtitle: 'View collection statistics and trends',
+                  // color: Color(0xFF2196F3),
+                  color: iconColorDahsbaord2,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewReportsScreen()),
+                    );
+                  },
+                ),
                 SizedBox(height: 12),
                 _buildGarbageActionItem(
                     icon: Icons.schedule,
                     title: 'Schedule Management',
                     subtitle: 'Manage collection schedules and shifts',
                     // color: Color(0xFF9C27B0),
-                    color: iconColorDahsbaord,
+                    color: iconColorDahsbaord2,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -505,24 +511,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  void _showComingSoon(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Coming Soon'),
-          content: Text('This feature will be available in the next update.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
     );
   }
 

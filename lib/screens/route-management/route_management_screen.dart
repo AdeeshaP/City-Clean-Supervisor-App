@@ -320,21 +320,7 @@ class _RouteManagementScreenState extends State<RouteManagementScreen>
                   ],
                 ),
               ),
-              // Container(
-              //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              //   decoration: BoxDecoration(
-              //     color: _getStatusBackgroundColor(route.status),
-              //     borderRadius: BorderRadius.circular(12),
-              //   ),
-              //   child: Text(
-              //     route.status,
-              //     style: TextStyle(
-              //       color: _getStatusColor(route.status),
-              //       fontSize: 12,
-              //       fontWeight: FontWeight.w500,
-              //     ),
-              //   ),
-              // ),
+       
             ],
           ),
           SizedBox(height: 12),
@@ -408,7 +394,7 @@ class _RouteManagementScreenState extends State<RouteManagementScreen>
   Widget _buildRouteDetailRow(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: Color(0xFF8B5A96)),
+        Icon(icon, size: 18, color: iconColorDahsbaord2),
         SizedBox(width: 12),
         Text(
           '$label: ',
@@ -450,12 +436,11 @@ class _RouteManagementScreenState extends State<RouteManagementScreen>
             style: TextStyle(fontSize: 13, color: Colors.white),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: color,
+            // backgroundColor: color,
             padding: EdgeInsets.symmetric(vertical: 8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            // fixedSize: Size(width, 30)
           ),
         ),
       ),

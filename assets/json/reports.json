@@ -1,0 +1,303 @@
+{
+    "daily_reports": [
+        {
+            "id": "DR-001",
+            "title": "Daily Collection Report",
+            "period": "Today - July 16, 2025",
+            "description": "Collection activities and performance metrics for today",
+            "report_type": "daily",
+            "generated_date": "2025-07-16T09:00:00Z",
+            "metrics": [
+                {
+                    "label": "Total Collections",
+                    "value": "42",
+                    "unit": "stops",
+                    "icon": "delete",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 12.5
+                },
+                {
+                    "label": "Active Trucks",
+                    "value": "28",
+                    "unit": "vehicles",
+                    "icon": "local_shipping",
+                    "color": "blue",
+                    "trend": "stable",
+                    "percentage": 0.0
+                },
+                {
+                    "label": "Routes Completed",
+                    "value": "15",
+                    "unit": "routes",
+                    "icon": "check_circle",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 8.3
+                },
+                {
+                    "label": "Pending Issues",
+                    "value": "6",
+                    "unit": "issues",
+                    "icon": "warning",
+                    "color": "orange",
+                    "trend": "down",
+                    "percentage": -15.2
+                }
+            ],
+            "chart_data": [
+                {
+                    "label": "Completed",
+                    "value": 42,
+                    "color": "green"
+                },
+                {
+                    "label": "In Progress",
+                    "value": 15,
+                    "color": "blue"
+                },
+                {
+                    "label": "Pending",
+                    "value": 6,
+                    "color": "orange"
+                }
+            ]
+        }
+    ],
+    "weekly_reports": [
+        {
+            "id": "WR-001",
+            "title": "Weekly Performance Report",
+            "period": "July 10-16, 2025",
+            "description": "Weekly collection performance and trend analysis",
+            "report_type": "weekly",
+            "generated_date": "2025-07-16T09:00:00Z",
+            "metrics": [
+                {
+                    "label": "Total Collections",
+                    "value": "294",
+                    "unit": "stops",
+                    "icon": "delete",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 18.2
+                },
+                {
+                    "label": "Average Response Time",
+                    "value": "2.4",
+                    "unit": "hours",
+                    "icon": "schedule",
+                    "color": "teal",
+                    "trend": "down",
+                    "percentage": -12.8
+                },
+                {
+                    "label": "Complaints Resolved",
+                    "value": "87",
+                    "unit": "complaints",
+                    "icon": "check_circle",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 22.1
+                },
+                {
+                    "label": "Fuel Efficiency",
+                    "value": "15.8",
+                    "unit": "km/l",
+                    "icon": "trending_up",
+                    "color": "blue",
+                    "trend": "up",
+                    "percentage": 5.7
+                }
+            ],
+            "chart_data": [
+                {
+                    "label": "Mon",
+                    "value": 35,
+                    "color": "blue"
+                },
+                {
+                    "label": "Tue",
+                    "value": 42,
+                    "color": "blue"
+                },
+                {
+                    "label": "Wed",
+                    "value": 48,
+                    "color": "blue"
+                },
+                {
+                    "label": "Thu",
+                    "value": 41,
+                    "color": "blue"
+                },
+                {
+                    "label": "Fri",
+                    "value": 45,
+                    "color": "blue"
+                },
+                {
+                    "label": "Sat",
+                    "value": 38,
+                    "color": "blue"
+                },
+                {
+                    "label": "Sun",
+                    "value": 45,
+                    "color": "blue"
+                }
+            ]
+        }
+    ],
+    "monthly_reports": [
+        {
+            "id": "MR-001",
+            "title": "Monthly Summary Report",
+            "period": "June 2025",
+            "description": "Comprehensive monthly performance analysis",
+            "report_type": "monthly",
+            "generated_date": "2025-07-01T09:00:00Z",
+            "metrics": [
+                {
+                    "label": "Total Collections",
+                    "value": "1,247",
+                    "unit": "stops",
+                    "icon": "delete",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 14.6
+                },
+                {
+                    "label": "Customer Satisfaction",
+                    "value": "94.2",
+                    "unit": "%",
+                    "icon": "check_circle",
+                    "color": "green",
+                    "trend": "up",
+                    "percentage": 3.8
+                },
+                {
+                    "label": "Operational Cost",
+                    "value": "Rs. 2.4M",
+                    "unit": "LKR",
+                    "icon": "trending_down",
+                    "color": "orange",
+                    "trend": "down",
+                    "percentage": -8.1
+                },
+                {
+                    "label": "Zone Coverage",
+                    "value": "96.8",
+                    "unit": "%",
+                    "icon": "location_on",
+                    "color": "blue",
+                    "trend": "up",
+                    "percentage": 2.3
+                }
+            ],
+            "chart_data": [
+                {
+                    "label": "Week 1",
+                    "value": 285,
+                    "color": "purple"
+                },
+                {
+                    "label": "Week 2",
+                    "value": 312,
+                    "color": "purple"
+                },
+                {
+                    "label": "Week 3",
+                    "value": 298,
+                    "color": "purple"
+                },
+                {
+                    "label": "Week 4",
+                    "value": 352,
+                    "color": "purple"
+                }
+            ]
+        }
+    ],
+    "complaint_summary": [
+        {
+            "month": "Jan",
+            "total_complaints": 156,
+            "resolved": 142,
+            "pending": 12,
+            "overdue": 2
+        },
+        {
+            "month": "Feb",
+            "total_complaints": 134,
+            "resolved": 128,
+            "pending": 6,
+            "overdue": 0
+        },
+        {
+            "month": "Mar",
+            "total_complaints": 178,
+            "resolved": 165,
+            "pending": 10,
+            "overdue": 3
+        },
+        {
+            "month": "Apr",
+            "total_complaints": 198,
+            "resolved": 184,
+            "pending": 11,
+            "overdue": 3
+        },
+        {
+            "month": "May",
+            "total_complaints": 167,
+            "resolved": 158,
+            "pending": 8,
+            "overdue": 1
+        },
+        {
+            "month": "Jun",
+            "total_complaints": 189,
+            "resolved": 176,
+            "pending": 10,
+            "overdue": 3
+        }
+    ],
+    "zone_performance": [
+        {
+            "zone_name": "North Zone",
+            "efficiency": 92.5,
+            "total_routes": 8,
+            "completed_routes": 7,
+            "active_complaints": 12
+        },
+        {
+            "zone_name": "Central Zone",
+            "efficiency": 88.2,
+            "total_routes": 6,
+            "completed_routes": 5,
+            "active_complaints": 18
+        },
+        {
+            "zone_name": "South Zone",
+            "efficiency": 94.8,
+            "total_routes": 9,
+            "completed_routes": 8,
+            "active_complaints": 8
+        },
+        {
+            "zone_name": "East Zone",
+            "efficiency": 87.1,
+            "total_routes": 7,
+            "completed_routes": 6,
+            "active_complaints": 15
+        },
+        {
+            "zone_name": "West Zone",
+            "efficiency": 91.3,
+            "total_routes": 8,
+            "completed_routes": 7,
+            "active_complaints": 9
+        }
+    ]
+}

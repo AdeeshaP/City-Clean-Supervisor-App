@@ -121,32 +121,28 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
           ),
         ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFFFC107).withOpacity(0.3),
-              Color(0xFFFFF8E1),
-              Color(0xFFFFFBE6),
-              Color(0xFFFFC107).withOpacity(0.3),
-            ],
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFFFC107).withOpacity(0.3),
+                Color(0xFFFFF8E1),
+                Color(0xFFFFFBE6),
+                Color(0xFFFFC107).withOpacity(0.3),
+              ],
+            ),
           ),
+          child: ListView.builder(
+              itemCount: collectionRoutes.length,
+              padding: EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                final route = collectionRoutes[index];
+                return _buildRouteCard2(route);
+              }),
         ),
-        child: ListView.builder(
-            itemCount: collectionRoutes.length,
-            padding: EdgeInsets.all(16),
-            itemBuilder: (context, index) {
-              final route = collectionRoutes[index];
-              return _buildRouteCard2(route);
-            }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        // backgroundColor: Color(0xFF8B5A96),
-        backgroundColor: primaryPurpleColor,
-        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -211,7 +207,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
                     Icon(
                       Icons.local_shipping,
                       size: 16,
-                      color: Colors.amber,
+                      color: iconColorDahsbaord2,
                     ),
                     SizedBox(width: 6),
                     Text(
@@ -229,7 +225,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
                   Icon(
                     Icons.access_time,
                     size: 16,
-                    color: Colors.amber,
+                    color: iconColorDahsbaord2,
                   ),
                   SizedBox(width: 6),
                   Text(
@@ -251,7 +247,7 @@ class _CollectionRoutesScreenState extends State<CollectionRoutesScreen> {
               Icon(
                 Icons.location_on,
                 size: 16,
-                color: Colors.amber,
+                color: iconColorDahsbaord2,
               ),
               SizedBox(width: 6),
               Expanded(

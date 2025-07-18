@@ -415,7 +415,7 @@
 // dependencies:
 //   google_maps_flutter: ^2.5.0
 
-import 'package:abans_city_clean_supervisor/models/issue.dart';
+import 'package:abans_city_clean_supervisor/models/pending_issue.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

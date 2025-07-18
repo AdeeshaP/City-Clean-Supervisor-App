@@ -283,7 +283,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                                 horizontal: 8, vertical: 3),
                             decoration: BoxDecoration(
                               color: template.isActive
-                                  ? Colors.green.withOpacity(0.2)
+                                  ? Colors.green.withOpacity(0.15)
                                   : Colors.grey.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -472,13 +472,13 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
                     _buildActionButton(
                       Icons.visibility,
                       'View',
-                      Colors.blue,
+                      Colors.green,
                       () => _viewTemplate(template),
                     ),
                     _buildActionButton(
                       Icons.edit,
                       'Edit',
-                      Colors.orange,
+                      Colors.blue,
                       () => _editTemplate(template),
                     ),
                     _buildActionButton(
@@ -502,7 +502,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
       children: [
         Icon(
           icon,
-          color: Colors.green,
+          color: iconColorDahsbaord2,
           size: 20,
         ),
         SizedBox(height: 4),
@@ -528,7 +528,7 @@ class _ScheduleTemplatesScreenState extends State<ScheduleTemplatesScreen> {
   Widget _buildResourceItem(IconData icon, int count, String label) {
     return Column(
       children: [
-        Icon(icon, color: primaryGreen, size: 18),
+        Icon(icon, color: iconColorDahsbaord2, size: 18),
         SizedBox(height: 4),
         Text(
           count.toString(),
