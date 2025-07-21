@@ -1,4 +1,3 @@
-import 'package:abans_city_clean_supervisor/constants/color_pallettee.dart';
 import 'package:abans_city_clean_supervisor/screens/fitst_screen.dart';
 import 'package:flutter/material.dart';
 
